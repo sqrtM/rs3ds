@@ -1,0 +1,34 @@
+[package]
+name = "rs3ds"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ctru-rs = { git = "https://github.com/rust3ds/ctru-rs.git" }
+cfg-if = "1.0"
+const-zero = "0.1.0"
+linker-fix-3ds = { git = "https://github.com/rust3ds/rust-linker-fix-3ds.git" }
+pthread-3ds = { git = "https://github.com/rust3ds/pthread-3ds.git" }
+libc = "0.2.121"
+bitflags = "1.0.0"
+widestring = "0.2.2"
+[build]
+target = "3ds"
+
+[target.3ds]
+linker = "arm-none-eabi-gcc"
+rustflags = [
+    "-Clink-arg=-specs=3dsx.specs",
+    "-Clink-arg=-mfloat-abi=hard",
+    "-Clink-arg=-march=armv6k",
+    "-Clink-arg=-mtune=mpcore",
+    "-Clink-arg=-mfpu=vfp",
+    "-Clink-arg=-mtp=soft",
+    "-Clink-arg=-lc",
+    "-Clink-arg=-lm",
+    "-Clink-arg=-lc",
+    "-Clink-arg=-lsysbase",
+    "-Clink-arg=-lc"
+]
